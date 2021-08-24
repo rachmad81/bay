@@ -13,10 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::group(['prefix'=>'user'],function(){
-    Route::post('get','API\User\UserController@get');
+Route::group(['middleware'=>'api_auth'],function(){
+    Route::group(['prefix'=>'user'],function(){
+        Route::post('get','API\User\UserController@get');
+        Route::post('simpan','API\User\UserController@simpan');
+        Route::post('hapus','API\User\UserController@hapus');
+    });
 });
