@@ -17,6 +17,10 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
+Route::group(['middleware'=>'login'],function(){
+    Route::post('login','API\LoginController@login');
+});
+
 Route::group(['middleware'=>'api_auth'],function(){
     Route::group(['prefix'=>'user'],function(){
         Route::post('get','API\User\UserController@get');
